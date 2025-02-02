@@ -1,7 +1,7 @@
 Turbine 04 overview
-Columns (variables) number: 299
+Columns (variables) number: 291
 Datapoints: 26064
 Time range:
  2021-01-01 00:00:00
  2021-06-30 23:50:00
-Missing values: 567260
+Missing values: 124939
