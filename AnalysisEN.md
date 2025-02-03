@@ -60,3 +60,27 @@ For this dataset, the nine columns mentioned above also turned out to be empty. 
 | --- | --- |--- | --- | --- | --- |
 | **Columns (variables)**  | 291  | 291 | 291 | 291 | 291 |
 | **Missing values** | 224586 | 126616 | 132812 | 124939 | 128462 |
+
+<div style="page-break-after: always;"></div>
+
+## EDP
+The next analyzed dataset comes from one of EDP's wind farms. It was collected during the whole 2017 and consists of SCADA signals averaged over 10-minuets time blocks.
+
+### Results
+The following results have been obtained:
+
+| | Turbine 01 | Turbine 06 | Turbine 07 | Turbine 11 |
+| --- | --- |--- | --- | --- |
+| **Columns (variables)**  | 82  | 82 | 82 | 82 |
+| **Datapoints** | 52244 | 52346 | 52294 | 52352 |
+| **First timestamp** | 2017-01-01 00:00:00+00:00 | 2017-01-01 00:00:00+00:00 | 2017-01-01 00:00:00+00:00 | 2017-01-01 00:00:00+00:00 |
+| **Last timestamp** | 2017-12-31 23:50:00+00:00 | 2017-12-31 23:50:00+00:00| 2017-12-31 23:50:00+00:00 |2017-12-31 23:50:00+00:00 | 
+| **Missing values** | 2 | 2 | 2 | 2 |
+
+It is worth to mention that the low number of missing values obtained here is not reliable. It was obtained by calculating the number of empty fields in the dataset.
+However, we can notice that the number of datapoints differs for each turbine. In fact, there should be 52.560 datapoints assuming that the turbine works the whole year
+without breaks. To obtain more reliable result and be able to compare the number of missing values with the previous datasets, we calculated it again including the missing rows with 82 variables each. The results we obtained are presented below:
+
+| | Turbine 01 | Turbine 06 | Turbine 07 | Turbine 11 |
+| --- | --- |--- | --- | --- |
+| **Missing values** | 25914 | 17550 | 21814 | 17058 |
