@@ -1,0 +1,20 @@
+Status overview for Status_Kelmarsh_4
+
+Time range:
+	start date: 2020-12-28 09:23:24
+	end date: 2021-06-30 19:21:45
+
+Columns number: 5495
+Rows number: 9
+Total data points: 30871
+Missing data points: 18584
+
+Missing timestamp start count: 0
+Missing timestamp end count: 4549
+Missing duration count: 4549
+Missing status: 0
+Missing message: 0
+Missing service_contract_category: 3934
+Missing IEC category: 57
+Missing comments: 5495
+Missing data points without comments 13089

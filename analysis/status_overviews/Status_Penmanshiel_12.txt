@@ -1,0 +1,20 @@
+Status overview for Status_Penmanshiel_12
+
+Time range:
+	start date: 2021-01-01 09:47:44
+	end date: 2021-06-30 22:36:29
+
+Columns number: 4723
+Rows number: 9
+Total data points: 26157
+Missing data points: 16350
+
+Missing timestamp start count: 0
+Missing timestamp end count: 4009
+Missing duration count: 4009
+Missing status: 0
+Missing message: 0
+Missing service_contract_category: 3571
+Missing IEC category: 38
+Missing comments: 4723
+Missing data points without comments 11627
