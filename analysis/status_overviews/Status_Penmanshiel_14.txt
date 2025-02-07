@@ -4,8 +4,8 @@ Time range:
 	start date: 2021-01-01 09:47:51
 	end date: 2021-06-30 22:41:56
 
-Columns number: 5693
-Rows number: 9
+Columns number: 9
+Rows number: 5693
 Total data points: 31486
 Missing data points: 19751
 
@@ -13,8 +13,10 @@ Missing timestamp start count: 0
 Missing timestamp end count: 4910
 Missing duration count: 4910
 Missing status: 0
+Missing code: 0
 Missing message: 0
 Missing service_contract_category: 4214
 Missing IEC category: 24
 Missing comments: 5693
 Missing data points without comments 14058
+Missing data points without comments and duration 9148
