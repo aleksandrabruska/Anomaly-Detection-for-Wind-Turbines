@@ -1,0 +1,7 @@
+Turbine 01 overview
+Columns (variables) number: 83
+Datapoints: 209236
+Time range:
+ T06
+ T11
+Missing values: 8
