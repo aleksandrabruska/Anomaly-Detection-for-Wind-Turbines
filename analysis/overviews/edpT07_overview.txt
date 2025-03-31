@@ -1,7 +1,0 @@
-Turbine T07 overview
-Columns (variables) number: 82
-Datapoints: 52294
-Time range:
- 2017-01-01T00:00:00+00:00
- 2017-12-31T23:50:00+00:00
-Missing values: 2
