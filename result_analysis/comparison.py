@@ -81,7 +81,7 @@ def compare_confusion_matrices(true, **kwargs):
 
 
 #example
-"""
+
 true = [0,0,0,1,1]
 pred = [0,1,0,1,1]
 pred2 = [1,1,0,1,1]
@@ -99,4 +99,3 @@ print_comparison(results)
 compare_PR(true, predictions1 = score, predictions2 = score2, predictions3 = score3, predictions4 = score4)
 compare_ROC(true, predictions1 = score, predictions2 = score2, predictions3 = score3, predictions4 = score4)
 compare_confusion_matrices(true, predictions1 = pred, predictions2 = pred2, predictions3 = pred3, predictions4 = pred4)
-"""
