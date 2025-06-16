@@ -12,8 +12,10 @@ train_files = ["25.csv", "69.csv", "13.csv", "24.csv", "3.csv", "17.csv", "38.cs
 test_files = ["68.csv", "22.csv", "72.csv", "73.csv", "0.csv", "26.csv", "40.csv", "42.csv", "10.csv", "45.csv",
               "84.csv", "51.csv"]
 all_files = train_files + test_files
+
+# Wykorzystywane sensory
 sensors = ["power_29_avg", "power_29_max", "power_29_min", "power_29_std",
-    "power_30_avg", "power_30_max", "power_30_min", "power_30_std"]
+           "power_30_avg", "power_30_max", "power_30_min", "power_30_std"]
 base_path = r"Wind Farm A\zAnomaliami"
 
 
@@ -65,7 +67,7 @@ def compute_event_label_resampled(y_pred, y_true, threshold=72):
     criticality = 0
     max_criticality = 0
     for pred, true in zip(y_pred, y_true):
-        if true == 0:  # Normalny interwał
+        if true == 0:
             if pred == 1:
                 criticality += 1
             else:
@@ -93,13 +95,12 @@ def train_model(column_name):
     return fitted_model, threshold
 
 
-# Funkcja do określenia y_true na podstawie AMONALIA
 def get_y_true(df):
     if 'ANOMALIA' in df.columns:
-        df['anomaly'] = df['ANOMALIA'].astype(int)  # Upewniamy się, że wartości są 0 lub 1
+        df['anomaly'] = df['ANOMALIA'].astype(int)
     else:
         raise ValueError("Brakująca kolumna 'ANOMALIA' w danych.")
-    y_true_resampled = df['anomaly'].resample('10T').max()  # 1, jeśli jakikolwiek punkt w interwale to anomalia
+    y_true_resampled = df['anomaly'].resample('10T').max()
     return y_true_resampled
 
 
@@ -109,20 +110,11 @@ def test_model(file_path, column_name, fitted_model, threshold):
     df = pd.read_csv(file_path, sep=";", parse_dates=['time_stamp'])
     df = df.set_index('time_stamp')
 
-    # Resampling danych sensora
     sensor_resampled = df[column_name].resample('10T').mean()
-
-    # Określenie y_true
     y_true_resampled = get_y_true(df)
-
-    # Wspólny indeks
     common_index = sensor_resampled.index.intersection(y_true_resampled.index)
-
-    # Filtrowanie danych do wspólnego indeksu
     sensor_data = sensor_resampled.loc[common_index].dropna()
     y_true = y_true_resampled.loc[common_index].dropna()
-
-    # Prognoza
     forecast = fitted_model.forecast(steps=len(sensor_data))
     forecast.index = sensor_data.index
     error = np.abs(sensor_data - forecast)
@@ -133,8 +125,6 @@ def test_model(file_path, column_name, fitted_model, threshold):
 
 # Trening modeli dla każdego sensora
 models = {sensor: train_model(sensor) for sensor in sensors}
-
-# Przetwarzanie wszystkich plików i obliczanie metryk
 true_events = []
 pred_events = []
 
@@ -142,7 +132,6 @@ for file in all_files:
     print(f"\nPrzetwarzanie pliku: {file}")
     file_path = os.path.join(base_path, file)
 
-    # Obliczanie y_true i y_pred dla każdego sensora
     y_true = None
     y_pred_sensors = {}
     for sensor in sensors:
@@ -151,16 +140,13 @@ for file in all_files:
             y_true = y_true_sensor
         y_pred_sensors[sensor] = y_pred_sensor.reindex(y_true.index)
 
-    # Łączenie predykcji z wszystkich sensorów
     y_pred_combined = np.any([y_pred_sensors[sensor].values for sensor in sensors], axis=0).astype(int)
 
-    # Obliczanie etykiet zdarzeń
     true_event = int(np.any(y_true))
     pred_event = compute_event_label_resampled(y_pred_combined, y_true)
     true_events.append(true_event)
     pred_events.append(pred_event)
 
-    # Obliczanie metryk w zależności od typu pliku
     if true_event == 1:
         coverage = CARE_coverage(y_true, y_pred_combined)
         earliness = CARE_earliness(y_true, y_pred_combined)
